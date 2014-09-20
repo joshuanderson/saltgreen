@@ -1,0 +1,54 @@
+@charset "UTF-8";
+html, body {
+	margin: 0;
+	padding: 0;
+}
+body.not-loaded {
+	height: 100%;
+	width: 100%;
+	overflow:hidden;
+	margin: 0;
+	padding: 0;
+}
+body {
+	background: #000;
+}
+body.not-loaded #loading-overlay {
+	background: rgba(255,255,255,.9);
+	display: block;
+	z-index: 100000;
+	position: absolute;
+}
+body #loading-overlay {
+	display: none;
+}
+#white-row {
+	background: white;
+	margin: -150px 0 0 0;
+	top: 50%;
+	height: 300px;
+	width: 100%;
+	padding: 0;
+	position: fixed;
+}
+#loading-overlay .centered {
+	height: 300px;
+	width: 400px;
+	margin: 0 auto;
+}
+
+#loading-overlay .centered .row {
+	padding-top: 10px;
+}
+#loading-overlay .centered img {
+	display: block;
+	margin: 0 auto;
+}
+.pages {
+	width: 100%;
+	margin: auto;
+	height: 100%;
+}
+.clear {
+	clear: both;
+}

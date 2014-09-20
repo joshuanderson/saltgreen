@@ -1,0 +1,10 @@
+@media all and (max-width: 960px) {
+}
+@media all and (max-width: 760px) {
+}
+@media all and (max-width: 560px) {
+	.responsive-mobile {
+		width: 100% !important;
+		max-width: 100% !important;
+	}
+}
