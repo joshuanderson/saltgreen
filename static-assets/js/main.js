@@ -1,6 +1,9 @@
 (function(D, W) {
 	"use strict";
-
+	var Page = {
+		height: 0,
+		width: 0
+	};
 	var S = function S(obj) {
 		var objSub = obj.substr(1, obj.length);
 		var _t = function _t(tag) {
@@ -32,8 +35,10 @@
 		if(typeof page === "object") {
 			var width = W.innerWidth;
 			var height = W.innerHeight;
-			page.style.height = height + "px";
+			page.style.minHeight = height + "px";
 			page.style.width = width + "px";
+			Page.height = height;
+			Page.width = width;
 		}
 	};
 
@@ -56,23 +61,8 @@
 	        elem["on" + type] = eventHandle;
 	    }
 	};
-
-	setAllPagesHeightWidth();
-	addEvent(W, "resize", setAllPagesHeightWidth);
-
-	var div = S(".not-loaded");
-	var hidePreloader = function hidePreloader() {
-		var seconds = 1000;
-		for(var i = 0; i < div.length; i++) {
-			div[i].className = div[i].className + " loaded";
-			W.setTimeout(function() {
-				div[i].style.display = "none";
-			}, seconds);
-			seconds = seconds + 1000;
-		}
-	};
-	var preloadImages = (function preloadImages() {
-		var imageObj = new Image();
+	(function () {
+		var totalImagesLoaded = 0;
 		var images = [
 			"loading.gif",
 			"intro-background.jpg",
@@ -82,10 +72,93 @@
 			"logo-white.png",
 			"welcome-title.png"
 		];
+		var imagesList = [];
+		var last = images.length - 1;
+		var divs = S(".not-loaded");
+		var hidePreloader = function hidePreloader() {
+			var seconds = 1000;
+			for(var i = 0; i < divs.length; i++) {
+				var div = divs[i];
+				div.className = div.className + " loaded";
+				W.setTimeout(function() {
+					S("#loading-overlay").style.display = "none";
+				}, seconds);
+				seconds = seconds + 1000;
+			}
+		};
+		var notifyImageLoaded = function notifyImageLoaded() {
+			totalImagesLoaded++;
+			if(totalImagesLoaded === images.length) {
+				hidePreloader();
+			}
+		};
 		for(var i = 0; i < images.length; i++) {
-			imageObj.src = "static-assets/img/" + images[i];
+			imagesList[i] = new Image();
+			imagesList[i].src = "static-assets/img/" + images[i];
+			imagesList[i].onload = notifyImageLoaded;
 		}
-		hidePreloader();
 	})();
 
+	var keyPress = function keyPress(e) {
+		switch (e.which) {
+			//up
+			case 38:
+			case 33:
+				scrollDirection("up");
+				break;
+			//down
+			case 40:
+			case 34:
+				scrollDirection("down");
+				break;
+			//Home
+			case 36:
+				//$.fn.fullpage.moveTo(1);
+				break;
+
+			//End
+			case 35:
+				//$.fn.fullpage.moveTo( $('.fp-section').length );
+				break;
+			default: return;
+		}
+	};
+
+	var MouseWheel = function MouseWheel(e) {
+		var direction = Math.max(-1, Math.min(1, (e.wheelDelta || -e.deltaY || -e.detail)));
+		if(direction < 0) {
+			scrollDirection("down");
+		} else {
+			scrollDirection("up");
+		}
+	}
+	var scrollDirection = function scrollDirection(direction) {
+		var newScrollPos = 0;
+		var scrollPos = W.scrollY;
+		if(direction === "up") {
+			newScrollPos = scrollPos - Page.height;
+		} else if(direction === "down") {
+			newScrollPos = scrollPos + Page.height;
+		}
+		if(scrollPos === 0 && newScrollPos < 0) {
+			newScrollPos = 0;
+		}
+		console.log("****************************************");
+		console.log(scrollPos);
+		console.log(newScrollPos);
+		console.log("****************************************");
+		W.scrollTo(0, newScrollPos);
+	}
+
+	setAllPagesHeightWidth();
+	addEvent(W, "resize", setAllPagesHeightWidth);
+	addEvent(W, "mousewheel", MouseWheel);
+	addEvent(W, "wheel", MouseWheel);
+	addEvent(W, "touchstart", function(e) {
+		console.log(e);
+	});
+	addEvent(W, "touchmove", function(e) {
+		console.log(e);
+	});
+	addEvent(D, "keydown", keyPress);
 })(document, window);

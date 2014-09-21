@@ -9,9 +9,6 @@ body {
 	width: 100%;
 	overflow: hidden;
 }
-body.loaded {
-	overflow: auto !important;
-}
 body.not-loaded #loading-overlay {
 	background: rgba(255,255,255,1);
 	display: block;
@@ -50,6 +47,16 @@ body #loading-overlay {
 	display: block;
 	margin: 0 auto;
 }
+.down-arrow {
+	position: absolute;
+	display: block;
+	height: 30px;
+	width: 200px;
+	bottom: 20px;
+	margin-left: -100px;
+	left: 50%;
+	z-index: 1;
+}
 #container, .pages {
 	height: 100%;
 	width: 100%;
@@ -72,6 +79,11 @@ body #loading-overlay {
 	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/welcome-background.jpg', sizingMethod='scale');
 	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/welcome-background.jpg', sizingMethod='scale')";
 	background: url("../img/welcome-background.jpg") no-repeat center center fixed; 
+}
+.pages.wwd {
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/wwd-background.jpg', sizingMethod='scale');
+	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/wwd-background.jpg', sizingMethod='scale')";
+	background: url("../img/wwd-background.jpg") no-repeat top center fixed; 
 }
 .intro-logo {
    position: relative;
@@ -124,6 +136,53 @@ body #loading-overlay {
 	max-width: 600px;
 	padding-left: 50px;
 }
+.wwd .row {
+	padding-top: 400px;
+	display: block;
+	position: relative;
+	max-width: 1100px;
+	min-height: 270px;
+}
+.wwd .row .left, .wwd .row .right {
+	position: relative;
+	display: block;
+	float: left
+}
+.wwd .row .left {
+	background: rgba(255, 255, 255, .9);
+	width: 60%;
+	padding: 20px 5%;
+	height: 100%;
+}
+.wwd .row .right {
+	background: rgba(112,15,0,.5);
+	width: 25%;
+	padding: 0;
+	margin-left: 5%;
+	min-height: 230px;
+	height: 100%;
+}
+.wwd .row .left .copy {
+	padding: 0px 20px;
+	border-left: #700F00 2px solid;
+	display: block;
+}
+.testimonials {
+	cursor: pointer;
+	font-family: Arial, sans-serif;
+	font-size: 12pt;
+	color: #000000;
+	text-transform: uppercase;
+	letter-spacing: 4px;
+	text-align: center;
+}
+.testimonials div {
+	padding-top: 90px;
+}
+.testimonials span {
+	font-size: 16pt;
+	color: #FFFFFF;
+}
 img.responsive {
 	width: 100%;
 	height: auto;
@@ -133,7 +192,7 @@ p {
 	font-family: Arial, sans-serif;
 	font-size: 12pt;
 }
-p.welcome-copy-text-title {
+p.title {
 	color: #700F00;
 	font-weight: bold;
 }
