@@ -127,9 +127,13 @@ body #loading-overlay {
 	text-transform: uppercase;
 	text-decoration: none;
 	letter-spacing: 8px;
+	-webkit-transition: color 0.5s ease-out;
+	-moz-transition: color 0.5s ease-out;
+	-o-transition: color 0.5s ease-out;
+	transition: color 0.5s ease-out;
 }
 #menu nav ul li a:hover {
-	color: #DDDDDD;
+	color: #AAAAAA;
 }
 .down-arrow {
 	position: absolute;
