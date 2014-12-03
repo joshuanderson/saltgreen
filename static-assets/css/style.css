@@ -17,7 +17,21 @@ body.not-loaded {
 body.not-loaded #loading-overlay {
 	background: rgba(255,255,255,1);
 	display: block;
-	z-index: 100000;
+	z-index: 1000;
+	position: fixed;
+	opacity: 1;
+	height: 100%;
+	width: 100%;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+#overlay-background.hidden {
+	opacity: 0;
+}
+#overlay-background {
+	background: rgba(0,0,0,.5);
+	display: block;
+	z-index: 1000;
 	position: fixed;
 	opacity: 1;
 	height: 100%;
@@ -29,7 +43,7 @@ body.loaded #loading-overlay {
 	opacity: 0;
 	display: none;
 }
-body #loading-overlay {
+body #loading-overlay, #overlay-background, #overlay-testimonials, #overlay-contact {
 	transition: opacity 1s linear;
 }
 #scroll-position {
@@ -41,7 +55,7 @@ body #loading-overlay {
 	height: 30px;
 	width: 200px;
 	padding: 5px;
-	z-index: 10000100;
+	z-index: 1001;
 }
 #white-row {
 	background: white;
@@ -127,13 +141,17 @@ body #loading-overlay {
 	text-transform: uppercase;
 	text-decoration: none;
 	letter-spacing: 8px;
+	-webkit-transition: color 0.5s ease-out;
+	-moz-transition: color 0.5s ease-out;
+	-o-transition: color 0.5s ease-out;
+	transition: color 0.5s ease-out;
 }
 #menu nav ul li a:hover {
-	color: #DDDDDD;
+	color: #AAAAAA;
 }
 .down-arrow {
 	position: absolute;
-	bottom: 50px;
+	bottom: 10px;
 	margin-left: -60px;
 	left: 50%;
 	z-index: 1;
@@ -149,6 +167,7 @@ body #loading-overlay {
 	min-height: 100%;
 	width: 100%;
 	position: relative;
+	padding: 0;
 	display: block;
 }
 .pages {
@@ -182,9 +201,11 @@ body #loading-overlay {
 	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/projects-background.jpg', sizingMethod='scale');
 	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/projects-background.jpg', sizingMethod='scale')";
 }
-.intro-logo {
-   position: relative;
+div.intro-logo {
+   position: absolute;
+   margin-top: -200px;
    top: 50%;
+   max-height: 400px;
    width: 100%;
 }
 .welcome-title {
@@ -263,7 +284,7 @@ body #loading-overlay {
 	border-left: #700F00 2px solid;
 	display: block;
 }
-.testimonials {
+.testimonials, .testimonials a {
 	cursor: pointer;
 	font-family: Arial, sans-serif;
 	font-size: 12pt;
@@ -271,17 +292,20 @@ body #loading-overlay {
 	text-transform: uppercase;
 	letter-spacing: 4px;
 	text-align: center;
+	text-decoration: none;
+	display: block;
 }
-.testimonials div {
+.testimonials a {
 	padding-top: 90px;
 }
-.testimonials span {
+.testimonials .launch span {
 	font-size: 16pt;
 	color: #FFFFFF;
 }
-.projects {
+.projects .top-gap {
+	display: block;
 	padding-top: 60px;
-	padding-bottom: 20px;
+	content: " ";
 }
 .projects .row-outside {
 	background: rgba(0,0,0,.3);
@@ -318,6 +342,7 @@ body #loading-overlay {
 	width: 100%;
 	display: table;
 	height: 110px;
+	padding-bottom: 20px;
 }
 .projects .we-work-on-list .we-work-on-item {
 	display: table-cell;

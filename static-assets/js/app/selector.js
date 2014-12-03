@@ -2,7 +2,11 @@ define(function(){
 	'use strict';
 	var D = document;
 	var W = window;
-	var S = function S(obj) {
+	var S = function S(obj, querySelector) {
+		querySelector = querySelector || false;
+		if(querySelector) {
+			return D.querySelectorAll(obj);
+		}
 		var objSub = obj.substr(1, obj.length);
 		var _t = function _t(tag) {
 			return D.getElementsByTagName(tag);
