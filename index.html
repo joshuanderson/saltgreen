@@ -35,6 +35,12 @@
         <![endif]-->
     </head>
     <body class="not-loaded">
+    	<div id="overlay-background" class="hidden" style="display: none">
+    	</div>
+    	<div id="overlay-testimonials">
+    	</div>
+    	<div id="overlay-contact">
+    	</div>
     	<div id="loading-overlay">
     		<div id="white-row">
 	    		<div class="centered">
@@ -74,7 +80,7 @@
 						<li class="menu-item" data-page="page-4">
 							<a href="#projects"><span>Projects</span></a>
 						</li>
-						<li class="menu-item">
+						<li class="menu-item" data-overlay="contact">
 							<a href="#contact"><span>Contact</span></a>
 						</li>
 					</ul>
@@ -157,11 +163,11 @@
 	    					</p>
 	    				</div>
     				</div>
-    				<div class="right testimonials">
-    					<div>
+    				<div class="right testimonials" data-overlay="testimonials">
+    					<a class="launch" href="#testimonials">
 	    					Read our 
 	    					<span>Testimonials</span>
-	    				</div>
+	    				</a>
 	    			</div>
     				<div class="clear"></div>
 	    		</div>
@@ -169,6 +175,7 @@
 
 	        <div class="pages projects" id="page-4">
 	        	<a name="projects"></a>
+	        	<div class="top-gap"></div>
 	        	<div class="row-outside">
 		        	<div class="row-inside">
 		        		<div class="centered header">
@@ -215,7 +222,6 @@
 					<div class="clear"></div>
     			</div>
 	    	</div>
-
 	    </div>
 		<div class="clear"></div>
 	    <script src="static-assets/js/lib/require.js" data-main="static-assets/js/app"></script>

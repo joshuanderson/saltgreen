@@ -18,6 +18,24 @@ define(['./selector', './preloader', './events', './pages', './nav'], function(S
 			});
 		}
 	}
+	var overlays = S("*[data-overlay]", true);
+	var overlayBg = S('#overlay-background');
+	Events.addToElement(overlayBg, 'click', function() {
+		overlayBg.className = 'hidden';
+		W.setTimeout(function() {
+			overlayBg.style.display = 'none';
+		}, 1000);
+	})
+	if(overlays) {
+		for(var i = 0; i < overlays.length; i++) {
+			var overlay = overlays[i];
+			Events.addToElement(overlay, 'click', function() {
+				var overlayId = this.dataset.overlay;
+				overlayBg.style.display = 'block';
+				overlayBg.className = "";
+			});
+		}
+	}
 
 	return { 
 		init : function() {
