@@ -4,15 +4,31 @@ define(['./selector', './preloader', './events', './pages', './nav'], function(S
 	var W = Selector.w;
 	var Main = Main || {};
 	var Scroll = new Nav(30, null);
+	var _isArray = function _isArray(array) {
+		var isArray = !!array.length || false;
+		return isArray;
+	}
 	var _clearOverlay = function _clearOverlay(overlay) {
 		overlay.style.display = 'block';
 		overlay.className = '';
 	};
 	var _addOverlayClass = function _addOverlayClass(overlay) {
-		overlay.className = 'hidden';
+		if(_isArray(overlay)) {
+			for(var i = 0; i < overlay.length; i++) {
+				overlay[i].className = 'hidden';
+			}
+		} else {
+			overlay.className = 'hidden';
+		}
 	};
-	var _removeOverlayStyle = function _setOverlayStyle(overlay) {
-		overlay.style.display = 'none';
+	var _removeOverlayStyle = function _removeOverlayStyle(overlay) {
+		if(_isArray(overlay)) {
+			for(var i = 0; i < overlay.length; i++) {
+				overlay[i].style.display = 'none';
+			}
+		} else {
+			overlay.style.display = 'none';
+		}
 	};
 
 	Events.addToWindow('resize', Pages.setAllHeightsWidths);
@@ -33,14 +49,13 @@ define(['./selector', './preloader', './events', './pages', './nav'], function(S
 	var overlays = S('*[data-overlay]', true);
 	var overlayBg = S('#overlay-background');
 	var overlayContact = S('#overlay-contact');
+	var overlayTestimonials = S('#overlay-testimonials');
 	var overlayClose = S('#overlay-contact a.close', true);
 	Events.addToElements([overlayBg, overlayClose], 'click', function() {
-		_addOverlayClass(overlayBg);
-		_addOverlayClass(overlayContact);
+		_addOverlayClass([overlayBg, overlayContact, overlayTestimonials]);
 		W.setTimeout(function() {
-			_removeOverlayStyle(overlayContact);
-			_removeOverlayStyle(overlayBg);
-		}, 1000);
+			_removeOverlayStyle([overlayContact, overlayBg, overlayTestimonials]);
+		}, 2000);
 	});
 	if(overlays) {
 		for(var i = 0; i < overlays.length; i++) {

@@ -27,7 +27,7 @@ body.not-loaded #loading-overlay {
     overflow: hidden;
     -webkit-overflow-scrolling: touch;
 }
-#overlay-background.hidden, #overlay-contact.hidden {
+#overlay-background.hidden, #overlay-contact.hidden, #overlay-testimonials.hidden {
 	zoom: 1;
 	filter: alpha(opacity=0);
 	opacity: 0;
