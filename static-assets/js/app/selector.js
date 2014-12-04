@@ -5,7 +5,12 @@ define(function(){
 	var S = function S(obj, querySelector) {
 		querySelector = querySelector || false;
 		if(querySelector) {
-			return D.querySelectorAll(obj);
+			var objects = D.querySelectorAll(obj);
+			if(objects.length === 1) {
+				return D.querySelector(obj);
+			} else {
+				return objects;
+			}
 		}
 		var objSub = obj.substr(1, obj.length);
 		var _t = function _t(tag) {

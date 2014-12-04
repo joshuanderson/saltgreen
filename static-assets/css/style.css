@@ -19,13 +19,17 @@ body.not-loaded #loading-overlay {
 	display: block;
 	z-index: 1000;
 	position: fixed;
+	zoom: 1;
+	filter: alpha(opacity=100);
 	opacity: 1;
 	height: 100%;
 	width: 100%;
     overflow: hidden;
     -webkit-overflow-scrolling: touch;
 }
-#overlay-background.hidden {
+#overlay-background.hidden, #overlay-contact.hidden, #overlay-testimonials.hidden {
+	zoom: 1;
+	filter: alpha(opacity=0);
 	opacity: 0;
 }
 #overlay-background {
@@ -33,18 +37,92 @@ body.not-loaded #loading-overlay {
 	display: block;
 	z-index: 1000;
 	position: fixed;
+	zoom: 1;
+	filter: alpha(opacity=100);
 	opacity: 1;
 	height: 100%;
 	width: 100%;
     overflow: hidden;
     -webkit-overflow-scrolling: touch;
 }
+#overlay-contact, #overlay-testimonials {
+	position: fixed;
+	z-index: 1001;
+	zoom: 1;
+	filter: alpha(opacity=100);
+	opacity: 1;
+	display: block;
+}
+#overlay-contact {
+	float: right;
+	top: 35px;
+	right: 25px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background: rgba(20, 2, 0, .7);
+}
+#overlay-contact, #overlay-contact a {
+	color: #FFFFFF;
+	font-size: 12pt;
+	font-family: "Gill Sans", Arial, sans-serif;
+	text-transform: uppercase;
+	text-decoration: none;
+	letter-spacing: 4px;
+}
+#overlay-contact .left-column, #overlay-contact .center-column, #overlay-contact .right-column {
+	display: block;
+	float: left;
+	width: 60px;
+}
+#overlay-contact .left-column {
+	background: url("../img/contact-logos.png") center center no-repeat;
+	height: 70px;
+	display: block;
+	float: left;
+}
+#overlay-contact .center-column {
+	width: 300px;
+	padding-top: 10px;
+}
+#overlay-contact .right-column {
+	width: 30px;
+	padding-top: 4px;
+}
+#overlay-contact .right-column a {
+	cursor: pointer;
+}
+#overlay-contact .center-column a {
+	padding-top: 10px;
+	display: block;
+}
+#overlay-testimonials {
+	max-width: 800px;
+	width: 100%;
+}
+#overlay-testimonials .top-row {
+	background: rgba(39, 4, 0, .93);
+	padding: 8px 5% 8px 15%;
+
+}
+#overlay-testimonials .bottom-row {
+	background: rgba(255, 255, 255, .93);
+	padding: 8px 5% 8px 15%;
+	display: block;
+
+}
 body.loaded #loading-overlay {
+	zoom: 1;
+	filter: alpha(opacity=0);
 	opacity: 0;
 	display: none;
 }
 body #loading-overlay, #overlay-background, #overlay-testimonials, #overlay-contact {
-	transition: opacity 1s linear;
+	-webkit-transition: opacity 1s ease-in-out;
+	-moz-transition: opacity 1s ease-in-out;
+	-ms-transition: opacity 1s ease-in-out;
+	-o-transition: opacity 1s ease-in-out;
+	transition: opacity 1s ease-in-out;
 }
 #scroll-position {
 	position: fixed;
@@ -75,7 +153,7 @@ body #loading-overlay, #overlay-background, #overlay-testimonials, #overlay-cont
 }
 #loading-overlay .centered, .down-arrow {
 	text-align: center;
-	font-family: Arial, sans-serif;
+	font-family: "Gill Sans", Arial, sans-serif;
 	font-size: 12pt;
 	text-transform: uppercase;
 	font-weight: bold;
@@ -137,7 +215,7 @@ body #loading-overlay, #overlay-background, #overlay-testimonials, #overlay-cont
 #menu nav ul li a {
 	color: #FFFFFF;
 	font-size: 12pt;
-	font-family: "Gill Sans", sans-serif;
+	font-family: "Gill Sans", Arial, sans-serif;
 	text-transform: uppercase;
 	text-decoration: none;
 	letter-spacing: 8px;
@@ -286,7 +364,7 @@ div.intro-logo {
 }
 .testimonials, .testimonials a {
 	cursor: pointer;
-	font-family: Arial, sans-serif;
+	font-family: "Gill Sans", Arial, sans-serif;
 	font-size: 12pt;
 	color: #000000;
 	text-transform: uppercase;
@@ -330,7 +408,7 @@ div.intro-logo {
 }
 .projects .we-work-on h3 {
 	margin: 30px 0px;
-	font-family: Arial, sans-serif;
+	font-family: "Gill Sans", Arial, sans-serif;
 	font-size: 14pt;
 	color: #FFFFFF;
 	font-weight: normal;
@@ -351,7 +429,7 @@ div.intro-logo {
 	text-align: center;
 	height: 100%;
 	font-size: 10pt;
-	font-family: Arial, sans-serif;
+	font-family: "Gill Sans", Arial, sans-serif;
 	letter-spacing: 4px;
 	border: 2px solid black;
 	background: rgba(25, 16, 2, .9);
@@ -390,8 +468,20 @@ img.responsive {
 	height: auto;
 	max-width: 100%;
 }
-p {
-	font-family: Arial, sans-serif;
+h3 {
+	font-size: 18pt;
+	color: #FFFFFF;
+	font-weight: normal;
+	letter-spacing: 8px;
+	text-transform: uppercase;
+	margin: 0;
+	padding: 0;
+	line-height: 18pt;
+}
+h3, p {
+	font-family: "Gill Sans", Arial, sans-serif;
+}
+p { 
 	font-size: 12pt;
 }
 p.title {

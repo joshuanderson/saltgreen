@@ -16,11 +16,12 @@ define(['./selector'], function(Selector){
 		'logo-intro-mobile.png',
 		'logo-transparent.png',
 		'logo-white.png',
+		'projects-title.png',
 		'saltgreen-logo-57.png',
 		'saltgreen-logo-72.png',
 		'saltgreen-logo-114.png',
 		'saltgreen-logo-160.png',
-		'projects-title.png',
+		'small-left-hand-logo.png',
 		'welcome-title.png',
 		'wwd-title.png'
 	];

@@ -23,9 +23,18 @@ define(['./selector'], function(Selector) {
 	var addToElement = function addToElement(element, type, callback) {
 		addEvent(element, type, callback);
 	};
+	var addToElements = function addToElements(elements, type, callback) {
+		var isArray = !!elements.length || false;
+		if(isArray) {
+			for(var i = 0; i < elements.length; i++) {
+				addEvent(elements[i], type, callback);
+			}
+		}
+	}
 	return {
 		'addToWindow' : addToWindow,
 		'addToDocument' : addToDocument,
+		'addToElements' : addToElements,
 		'addToElement' : addToElement
 	};
 });
