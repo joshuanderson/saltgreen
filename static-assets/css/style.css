@@ -186,6 +186,11 @@ body #loading-overlay, #overlay-background, #overlay-testimonials, #overlay-cont
 #menu {
 	position: fixed;
 	height: 30px;
+}
+a.mobile-menu {
+	cursor: pointer;
+}
+#menu, #mobile-menu {
 	padding: 0;
 	margin: 0;
 	width: 100%;
@@ -195,6 +200,21 @@ body #loading-overlay, #overlay-background, #overlay-testimonials, #overlay-cont
 	-webkit-box-shadow: 0px 0px 15px 5px rgba(0,0,0, .75);
 	-moz-box-shadow: 0px 0px 15px 5px rgba(0,0,0, .75);
 	box-shadow: 0px 0px 15px 5px rgba(0,0,0, .75);
+}
+#mobile-menu {
+	position: absolute;
+    -webkit-transition: -webkit-transform 1s;
+    transition: transform 1s;
+}
+#mobile-menu .off-screen {
+    -ms-transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+}
+#mobile-menu .off-screen.on {
+    -ms-transform: translateX(0%);
+    -webkit-transform: translateX(0%);
+    transform: translateX(0%);
 }
 #menu nav {
 	float: right;

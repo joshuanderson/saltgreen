@@ -57,6 +57,9 @@ define(['./selector', './preloader', './events', './pages', './nav'], function(S
 			_removeOverlayStyle([overlayContact, overlayBg, overlayTestimonials]);
 		}, 2000);
 	});
+	Events.addToElement(S('a.mobile-menu'), 'click', function() {
+		S('#mobile-menu .off-screen', true).className = 'off-screen on';
+	});
 	if(overlays) {
 		for(var i = 0; i < overlays.length; i++) {
 			var overlay = overlays[i];
