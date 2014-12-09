@@ -5,3 +5,5 @@ node_modules/*
 .sass-cache
 .sass-cache/*
 *.sublime-*
+*.iml
+*.idea
