@@ -166,7 +166,7 @@ body #loading-overlay, #overlay-background, #overlay-testimonials, #overlay-cont
 	padding-top: 10px;
 }
 #loading-overlay .centered .row.loading {
-	text-transform: lowercase;
+	text-transform: uppercase;
 }
 #loading-overlay .centered img {
 	display: block;
@@ -205,6 +205,7 @@ a.mobile-menu {
 	position: absolute;
     -webkit-transition: -webkit-transform 1s;
     transition: transform 1s;
+    cursor: pointer;
 }
 #mobile-menu .off-screen {
     -ms-transform: translateX(100%);

@@ -73,9 +73,9 @@ define(['./selector', './preloader', './events', './pages', './nav'], function(S
 
 	return { 
 		init : function() {
-			Preloader.init(function(){
-				Pages.setAllHeightsWidths();
-			});
+			//Preloader.init(function(){
+			//	Pages.setAllHeightsWidths();
+			//});
 		}
 	};
 });
