@@ -41,12 +41,10 @@ define(['./selector'], function (Selector) {
         tOff = this.getRealTop(element.parentNode);
 
         pOff = this.getPageScroll(); // page offsetTop
-        //console.log("pOff: " + pOff + " eOff: " + eOff);
         if (pOff === null || isNaN(pOff) || pOff === 'undefined') {
             pOff = 0;
         }
         scrVal = eOff - pOff;
-        console.log("scrVal: " + scrVal + " tOff: " + tOff);
         if (scrVal < tOff) {
             pos = (pOff + tOff) - eOff;
             dir = -1;
@@ -55,11 +53,8 @@ define(['./selector'], function (Selector) {
             pos = (eOff - tOff - pOff);
             dir = 1;
         }
-        console.log("pos: " + pos + " dir: " + dir);
         if (scrVal !== tOff) {
             step = ~~((pos / 4) + 1) * dir;
-            //      console.log("step: " + step);
-
             if (this.iterr > 1) {
                 this.iterr -= 1;
             } else {

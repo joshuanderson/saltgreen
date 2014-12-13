@@ -4,6 +4,13 @@ define(['./selector', './preloader', './events', './pages', './nav'], function (
     var W = Selector.w;
     var Main = Main || {};
     var Scroll = new Nav(30, null);
+    var overlays = S('*[data-overlay]', true);
+    var overlayBg = S('#overlay-background');
+    var overlayContact = S('#overlay-contact');
+    var overlayTestimonials = S('#overlay-testimonials');
+    var overlayClose = S('#overlay-contact a.close', true);
+    var mobileMenu = S('.mobile-menu');
+    var mobileMenuById = S('#mobile-menu');
     var _isArray = function _isArray(array) {
         var isArray = !!array.length || false;
         return isArray;
@@ -30,6 +37,21 @@ define(['./selector', './preloader', './events', './pages', './nav'], function (
             overlay.style.display = 'none';
         }
     };
+    var _hasClass = function _hasClass(obj, classToCheck) {
+        var className = obj.className || false;
+        if(className) {
+            return (className.indexOf(classToCheck) !== -1);
+        } else {
+            return false;
+        }
+    };
+    var _toggleClass = function _toggleClass(obj, classToToggle) {
+        if(_hasClass(obj, classToToggle)) {
+            obj.className = obj.className.replace(classToToggle, '');
+        } else {
+            obj.className = obj.className + ' ' + classToToggle;
+        }
+    };
 
     Events.addToWindow('resize', Pages.setAllHeightsWidths);
 
@@ -46,26 +68,16 @@ define(['./selector', './preloader', './events', './pages', './nav'], function (
             });
         }
     }
-    var overlays = S('*[data-overlay]', true);
-    var overlayBg = S('#overlay-background');
-    var overlayContact = S('#overlay-contact');
-    var overlayTestimonials = S('#overlay-testimonials');
-    var overlayClose = S('#overlay-contact a.close', true);
     Events.addToElements([overlayBg, overlayClose], 'click', function () {
         _addOverlayClass([overlayBg, overlayContact, overlayTestimonials]);
         W.setTimeout(function () {
             _removeOverlayStyle([overlayContact, overlayBg, overlayTestimonials]);
         }, 2000);
     });
-    var mobileMenu = S('.mobile-menu');
     Events.addToElements(mobileMenu, 'click', function () {
-        var mobileMenu = S('#mobile-menu');
-        if(mobileMenu.className === 'on') {
-            mobileMenu.className = '';
-        } else {
-            mobileMenu.className = 'on';
-        }
+        _toggleClass(mobileMenuById, 'on');
     });
+
     if (overlays) {
         for (var i = 0; i < overlays.length; i++) {
             var overlay = overlays[i];
