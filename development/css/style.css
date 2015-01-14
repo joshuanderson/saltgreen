@@ -366,6 +366,7 @@ body #loading-overlay, #overlay-background, #overlay-testimonials, #overlay-cont
   padding: 0;
   margin: 0;
 }
+
 #container, .pages {
   min-height: 100%;
   width: 100%;
