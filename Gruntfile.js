@@ -1,43 +1,107 @@
-module.exports = function(grunt) {
-  grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
-    concat: {
-      options: {
-        separator: ';'
-      },
-      dist: {
-        src: ['static-assets/dev-js/**/*.js'],
-        dest: 'static-assets/js/'
-      }
-    }, 
-    uglify: {
-      options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
-      },
-      dist: {
-        files: {
-          'dist/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
-        }
-      }
-    },
-    jshint: {
-      files: ['Gruntfile.js', 'static-assets/dev-js/**/*.js'],
-      options: {
-        globals: {
-          console: true,
-          module: true,
-          document: true
-        }
-      }
-    },
-    watch: {
-      files: ['<%= jshint.files %>'],
-      tasks: ['jshint']
-    }
-  });
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
-};
+(function () {
+	'use strict';
+	module.exports = function (grunt) {
+		var rjsConfig = {
+			appDir: 'development',
+			baseUrl: './',
+			dir: 'static-assets',
+			optimize: 'uglify2',
+			optimizeCss: 'none',
+			preserveLicenseComments: false,
+			skipDirOptimize: false,
+		};
+		var initialConfig = {
+			pkg: grunt.file.readJSON('package.json'),
+
+			requirejs: {
+				compile: {
+					options: rjsConfig
+				}
+			},
+
+			csso: {
+				main: {
+					options: {
+						restructure: true
+					},
+					files: [
+						{ src: 'static-assets/css/style.css', dest: 'static-assets/css/style.css' }
+					]
+				}
+			},
+
+			copy: {
+				manifestFiles: {
+					expand: true,
+					cwd: 'development',
+					src: [
+						'require.json',
+						'component.json'
+					],
+					dest: 'static-assets'
+				}
+			},
+
+			compass: {
+				options: {
+					basePath: '',
+					outputStyle: 'expanded',
+					trace: true,
+					sassDir: 'development/css',
+					cssDir: 'static-assets/css',
+					specify: 'development/css/*.scss',
+					importPath: 'node_modules/console-bass-sass'
+				},
+				dev: {},
+				dist: {
+					options: {
+						trace: false
+					}
+				}
+			},
+			concat: {
+				options: {
+					separator: ';'
+				},
+				dist: {
+					src: [ 'development/js/**/*.js' ],
+					dest: 'static-assets/js/'
+				}
+			},
+			uglify: {
+				options: {
+					banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+				},
+				dist: {
+					files: {
+						'static-assets/js/<%= pkg.name %>.min.js': [ '<%= concat.dist.dest %>' ]
+					}
+				}
+			},
+			jshint: {
+				files: [ 'Gruntfile.js', 'development/js/**/*.js' ],
+				options: {
+					globals: {
+						console: true,
+						module: true,
+						document: true
+					}
+				}
+			},
+			watch: {
+				files: [ '<%= jshint.files %>' ],
+				tasks: [ 'jshint' ]
+			}
+		};
+		grunt.initConfig(initialConfig);
+		grunt.loadNpmTasks('grunt-contrib-requirejs');
+		grunt.loadNpmTasks('grunt-contrib-compass');
+		grunt.loadNpmTasks('grunt-csso');
+		grunt.loadNpmTasks('grunt-contrib-uglify');
+		grunt.loadNpmTasks('grunt-contrib-jshint');
+		grunt.loadNpmTasks('grunt-contrib-watch');
+		grunt.loadNpmTasks('grunt-contrib-concat');
+
+		grunt.registerTask('default', [ 'requirejs' ]);
+	};
+})();

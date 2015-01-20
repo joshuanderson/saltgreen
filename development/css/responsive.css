@@ -1,0 +1,120 @@
+@media all and (max-width: 1100px) {
+
+}
+
+@media all and (min-width: 1024px) {
+  .desktop-only {
+    display: block;
+  }
+
+  .mobile-only {
+    display: none;
+  }
+}
+
+@media all and (max-width: 1024px) {
+  .desktop-only {
+    display: none;
+  }
+
+  .mobile-only {
+    display: block;
+  }
+
+  .welcome-copy .left {
+    display: none;
+  }
+
+  .welcome-copy .right {
+    border-left: 0px;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    float: none;
+  }
+
+  .wwd .row {
+    padding-top: 0px;
+  }
+
+  .wwd .row .left, .wwd .row .right {
+    width: 100%;
+    padding: 0px;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+    float: none;
+  }
+
+  .welcome-copy-text, .wwd .row .left .copy {
+    border-left: 0;
+    padding: 20px;
+  }
+
+  .pages.wwd {
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/wwd-mobile-background.jpg', sizingMethod='scale');
+    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/wwd-mobile-background.jpg', sizingMethod='scale')";
+    background-image: url("../img/wwd-mobile-background.jpg");
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-attachment: scroll;
+    background-attachment: fixed;
+  }
+
+  .pages {
+    background-attachment: scroll !important;
+  }
+}
+
+@media all and (max-width: 648px) {
+  .projects .we-work-on-list {
+    display: block;
+    height: auto;
+  }
+
+  .projects .we-work-on-list .we-work-on-item span {
+    display: inline;
+  }
+
+  .projects .we-work-on-list .we-work-on-item {
+    display: block;
+    width: 90%;
+    margin: 8px 0;
+    padding: 8px 5%;
+  }
+
+  .projects .we-work-on-list .we-work-on-item.first {
+    border-left: 0;
+  }
+
+  .projects .we-work-on-list .we-work-on-item.last {
+    border-right: 0;
+  }
+
+  .responsive-mobile {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .intro-logo {
+
+  }
+
+  .projects .we-work-on-list ul li {
+    margin: 0 0 0 0;
+  }
+
+}
+
+@media all and (max-width: 860px) {
+
+  .mobile-menu, #mobile-menu {
+    filter: alpha(opacity=100);
+    opacity: 1;
+  }
+  #menu {
+    filter: alpha(opacity=0);
+    opacity: 0;
+  }
+}

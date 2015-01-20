@@ -229,10 +229,9 @@ body #loading-overlay, #overlay-background, #overlay-testimonials, #overlay-cont
 }
 
 #menu {
-  height: 40px;
+  height: 30px;
   filter: alpha(opacity=100);
   opacity: 1;
-  overflow: hidden;
 }
 
 .mobile-menu {
