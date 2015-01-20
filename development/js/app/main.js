@@ -95,7 +95,7 @@ define([
 
 			this.events.addToElements(mobileMenu, 'click', function () {
 				var mobileMenu = self.selector.find('#mobile-menu');
-				
+
 				if (mobileMenu.className === 'on') {
 					mobileMenu.className = '';
 				} else {
@@ -126,15 +126,15 @@ define([
 		};
 
 		Main.prototype.init = function () {
-			var main = this;
+			var self = this;
 			this.preloader.preloadImages(function() {
-				main.pages.setAllHeightsWidths();
+				self.pages.setAllHeightsWidths();
+				self.addPageResizeEvents();
+				self.addMenuItemsEvents();
+				self.addCloseOverlayEvents();
+				self.addOverlayEvents();
+				self.addMobileMenuEvents();
 			});
-			this.addPageResizeEvents();
-			this.addMenuItemsEvents();
-			this.addCloseOverlayEvents();
-			this.addOverlayEvents();
-			this.addMobileMenuEvents();
 		};
 
 		return Main;
