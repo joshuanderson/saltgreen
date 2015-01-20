@@ -80,7 +80,7 @@ define([
 
 			this.events.addToElements([ overlayBg, overlayClose ], 'click', function () {
 				self._addOverlayClass([ overlayBg, overlayContact, overlayTestimonials ]);
-
+				self.resetHash();
 				self.selector.w.setTimeout(function () {
 					self._removeOverlayStyle([ overlayContact, overlayBg, overlayTestimonials ]);
 				}, 2000);
@@ -125,6 +125,24 @@ define([
 			}
 		};
 
+		Main.prototype.checkHash = function () {
+			var hash = location.hash;
+			var object;
+			if (hash === '') {
+				this.resetHash();
+			} else {
+				object = this.selector.find('a[href="' + hash + '"]', true);
+				if (this._isArray(object)) {
+					object[0].click();
+				}
+
+			}
+		}
+
+		Main.prototype.resetHash = function () {
+			location.hash = '#/home';
+		};
+
 		Main.prototype.init = function () {
 			var self = this;
 			this.preloader.preloadImages(function() {
@@ -134,6 +152,7 @@ define([
 				self.addCloseOverlayEvents();
 				self.addOverlayEvents();
 				self.addMobileMenuEvents();
+				self.checkHash();
 			});
 		};
 
