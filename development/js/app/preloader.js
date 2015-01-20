@@ -1,11 +1,10 @@
 define(['./selector'], function (Selector) {
     'use strict';
-    var S = Selector.selector;
-    var W = Selector.w;
-    var totalImagesLoaded = 0;
-    var _callback = function () {
-    };
-    var images = [
+
+    var Preloader = function (Selector) {
+        this.selector = Selector;
+        this.totalImagesLoaded = 0;
+        this.imagesToLoad = [
         'loading.gif',
         'intro-background.jpg',
         'projects-background.jpg',
@@ -25,39 +24,51 @@ define(['./selector'], function (Selector) {
         'small-left-hand-logo.png',
         'welcome-title.png',
         'wwd-title.png'
-    ];
-    var imagesList = [];
-    var last = images.length - 1;
-    var divs = S('.not-loaded');
-    var _resetDivDisplay = function _resetDivDisplay() {
-        S('#loading-overlay').style.display = 'none';
+        ];
+        this.imagesLoadedList = [];
+        this.totalImages = this.imagesToLoad.length;
+        this.seconds = 1000;
+        this.finished = function () { alert("none"); };
     };
-    var hidePreloader = function hidePreloader() {
-        var seconds = 1000;
+
+    Preloader.prototype.resetDivDisplay = function () {
+        this.selector.find('#loading-overlay').style.display = 'none';
+    };
+
+    Preloader.prototype.hidePreloader = function (callback) {
+        var divs = this.selector.find('.not-loaded');
+        var preloader = this;
+        var div;
+
         for (var i = 0; i < divs.length; i++) {
-            var div = divs[i];
+            div = divs[i];
             div.className = 'loaded';
-            W.setTimeout(_resetDivDisplay, seconds);
-            _callback();
-            seconds = seconds + 1000;
+
+            this.selector.w.setTimeout((function() {
+                preloader.resetDivDisplay();
+            }), this.seconds);
+
+            callback();
+            this.seconds = this.seconds + 1000;
         }
     };
-    var notifyImageLoaded = function notifyImageLoaded() {
-        totalImagesLoaded++;
-        if (totalImagesLoaded === images.length) {
-            hidePreloader();
+
+    Preloader.prototype.preloadImages = function (callback) {
+
+        var _notifyImageLoaded = function (callback) {
+            this.totalImagesLoaded++;
+
+            if (this.totalImagesLoaded === this.totalImages) {
+                this.hidePreloader(callback);
+            }
+        };
+
+        for (var i = 0; i < this.totalImages; i++) {
+            this.imagesLoadedList[i] = new Image();
+            this.imagesLoadedList[i].src = 'static-assets/img/' + this.imagesToLoad[i];
+            this.imagesLoadedList[i].onload = _notifyImageLoaded.call(this, callback);
         }
     };
-    var preloadImages = function preloadImages(callback) {
-        _callback = callback;
-        for (var i = 0; i < images.length; i++) {
-            imagesList[i] = new Image();
-            imagesList[i].src = 'static-assets/img/' + images[i];
-            imagesList[i].onload = notifyImageLoaded;
-        }
-    };
-    return {
-        'init': preloadImages,
-        'hidePreloader': hidePreloader
-    };
+
+    return Preloader;
 });

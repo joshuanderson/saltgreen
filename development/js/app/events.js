@@ -1,8 +1,12 @@
 define(['./selector'], function (Selector) {
     'use strict';
-    var W = Selector.w;
-    var D = Selector.d;
-    var addEvent = function addEvent(elem, type, eventHandle) {
+
+    var Events = function (Main, Selector) {
+        this.main = Main;
+        this.selector = Selector;
+    };
+
+    Events.prototype.add = function (elem, type, eventHandle) {
         if (elem === null || (typeof elem === 'undefined')) {
             return;
         }
@@ -14,28 +18,26 @@ define(['./selector'], function (Selector) {
             elem['on' + type] = eventHandle;
         }
     };
-    var addToWindow = function addToWindow(type, callback) {
-        addEvent(W, type, callback);
+
+    Events.prototype.addToWindow = function (type, callback) {
+        this.add(this.selector.w, type, callback);
     };
-    var addToDocument = function addToDocument(type, callback) {
-        addEvent(D, type, callback);
+
+    Events.prototype.addToDocument = function (type, callback) {
+        this.add(this.selector.d, type, callback);
     };
-    var addToElement = function addToElement(element, type, callback) {
-        addEvent(element, type, callback);
+
+    Events.prototype.addToElement = function (element, type, callback) {
+        this.add(element, type, callback);
     };
-    var addToElements = function addToElements(elements, type, callback) {
-        var isArray = !!elements.length || false;
-        if (isArray) {
+
+    Events.prototype.addToElements = function (elements, type, callback) {
+        if (this.main._isArray(elements)) {
             for (var i = 0; i < elements.length; i++) {
-                addEvent(elements[i], type, callback);
+                this.add(elements[i], type, callback);
             }
         }
     };
 
-    return {
-        'addToWindow': addToWindow,
-        'addToDocument': addToDocument,
-        'addToElements': addToElements,
-        'addToElement': addToElement
-    };
+    return Events;
 });
