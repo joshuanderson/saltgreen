@@ -94,7 +94,7 @@ define([
 			var self = this;
 
 			this.events.addToElements(mobileMenu, 'click', function () {
-				var mobileMenu = self.selector.find('#mobile-menu');
+				var mobileMenu = self.selector.find('#menu');
 
 				if (mobileMenu.className === 'on') {
 					mobileMenu.className = '';
