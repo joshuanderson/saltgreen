@@ -19,17 +19,6 @@
 				}
 			},
 
-			csso: {
-				main: {
-					options: {
-						restructure: true
-					},
-					files: [
-						{ src: 'static-assets/css/style.css', dest: 'static-assets/css/style.css' }
-					]
-				}
-			},
-
 			copy: {
 				manifestFiles: {
 					expand: true,
@@ -49,8 +38,7 @@
 					trace: true,
 					sassDir: 'development/css',
 					cssDir: 'static-assets/css',
-					specify: 'development/css/*.scss',
-					importPath: 'node_modules/console-bass-sass'
+					specify: 'development/css/*.scss'
 				},
 				dev: {},
 				dist: {
@@ -97,7 +85,6 @@
 		grunt.loadNpmTasks('grunt-contrib-requirejs');
 		grunt.loadNpmTasks('grunt-contrib-sass');
 		grunt.loadNpmTasks('grunt-contrib-compass');
-		grunt.loadNpmTasks('grunt-csso');
 		grunt.loadNpmTasks('grunt-contrib-uglify');
 		grunt.loadNpmTasks('grunt-contrib-jshint');
 		grunt.loadNpmTasks('grunt-contrib-watch');
