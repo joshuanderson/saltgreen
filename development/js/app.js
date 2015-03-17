@@ -24,8 +24,8 @@
         'app/pages',
         'app/nav'
     ], function (Main, Selector, Preloader, Events, Pages, Nav) {
-        var Main = new Main(Selector, Preloader, Events, Pages, Nav);
-        Main.init();
+        var main = new Main(Selector, Preloader, Events, Pages, Nav);
+        main.init();
     });
 
     })();

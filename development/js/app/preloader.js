@@ -28,7 +28,7 @@ define(['./selector'], function (Selector) {
         this.imagesLoadedList = [];
         this.totalImages = this.imagesToLoad.length;
         this.seconds = 1000;
-        this.finished = function () { alert("none"); };
+        this.finished = function () { };
     };
 
     Preloader.prototype.resetDivDisplay = function () {
@@ -38,15 +38,16 @@ define(['./selector'], function (Selector) {
     Preloader.prototype.hidePreloader = function (callback) {
         var divs = this.selector.find('.not-loaded');
         var preloader = this;
+        var resetDivDisplay = function() {
+            preloader.resetDivDisplay();
+        };
         var div;
 
         for (var i = 0; i < divs.length; i++) {
             div = divs[i];
             div.className = 'loaded';
 
-            this.selector.w.setTimeout((function() {
-                preloader.resetDivDisplay();
-            }), this.seconds);
+            this.selector.w.setTimeout(resetDivDisplay, this.seconds);
 
             callback();
             this.seconds = this.seconds + 1000;
