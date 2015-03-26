@@ -212,6 +212,110 @@
         }
       }
     },
+    "grunt-autoprefixer": {
+      "version": "2.2.0",
+      "from": "grunt-autoprefixer@^2.2.0",
+      "resolved": "https://registry.npmjs.org/grunt-autoprefixer/-/grunt-autoprefixer-2.2.0.tgz",
+      "dependencies": {
+        "autoprefixer-core": {
+          "version": "5.1.8",
+          "from": "autoprefixer-core@^5.0.0",
+          "resolved": "https://registry.npmjs.org/autoprefixer-core/-/autoprefixer-core-5.1.8.tgz",
+          "dependencies": {
+            "browserslist": {
+              "version": "0.2.0",
+              "from": "browserslist@~0.2.0",
+              "resolved": "https://registry.npmjs.org/browserslist/-/browserslist-0.2.0.tgz"
+            },
+            "num2fraction": {
+              "version": "1.0.1",
+              "from": "num2fraction@~1.0.1",
+              "resolved": "https://registry.npmjs.org/num2fraction/-/num2fraction-1.0.1.tgz"
+            },
+            "caniuse-db": {
+              "version": "1.0.30000106",
+              "from": "caniuse-db@^1.0.30000106",
+              "resolved": "https://registry.npmjs.org/caniuse-db/-/caniuse-db-1.0.30000106.tgz"
+            },
+            "postcss": {
+              "version": "4.0.6",
+              "from": "postcss@~4.0.6",
+              "resolved": "https://registry.npmjs.org/postcss/-/postcss-4.0.6.tgz",
+              "dependencies": {
+                "source-map": {
+                  "version": "0.2.0",
+                  "from": "source-map@~0.2.0",
+                  "resolved": "https://registry.npmjs.org/source-map/-/source-map-0.2.0.tgz",
+                  "dependencies": {
+                    "amdefine": {
+                      "version": "0.1.0",
+                      "from": "amdefine@>=0.0.4",
+                      "resolved": "https://registry.npmjs.org/amdefine/-/amdefine-0.1.0.tgz"
+                    }
+                  }
+                },
+                "js-base64": {
+                  "version": "2.1.7",
+                  "from": "js-base64@~2.1.7",
+                  "resolved": "https://registry.npmjs.org/js-base64/-/js-base64-2.1.7.tgz"
+                }
+              }
+            }
+          }
+        },
+        "diff": {
+          "version": "1.2.2",
+          "from": "diff@~1.2.1",
+          "resolved": "https://registry.npmjs.org/diff/-/diff-1.2.2.tgz"
+        },
+        "chalk": {
+          "version": "0.5.1",
+          "from": "chalk@~0.5.0",
+          "resolved": "https://registry.npmjs.org/chalk/-/chalk-0.5.1.tgz",
+          "dependencies": {
+            "ansi-styles": {
+              "version": "1.1.0",
+              "from": "ansi-styles@^1.1.0",
+              "resolved": "https://registry.npmjs.org/ansi-styles/-/ansi-styles-1.1.0.tgz"
+            },
+            "escape-string-regexp": {
+              "version": "1.0.3",
+              "from": "escape-string-regexp@^1.0.0",
+              "resolved": "https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-1.0.3.tgz"
+            },
+            "has-ansi": {
+              "version": "0.1.0",
+              "from": "has-ansi@^0.1.0",
+              "resolved": "https://registry.npmjs.org/has-ansi/-/has-ansi-0.1.0.tgz",
+              "dependencies": {
+                "ansi-regex": {
+                  "version": "0.2.1",
+                  "from": "ansi-regex@^0.2.1",
+                  "resolved": "https://registry.npmjs.org/ansi-regex/-/ansi-regex-0.2.1.tgz"
+                }
+              }
+            },
+            "strip-ansi": {
+              "version": "0.3.0",
+              "from": "strip-ansi@^0.3.0",
+              "resolved": "https://registry.npmjs.org/strip-ansi/-/strip-ansi-0.3.0.tgz",
+              "dependencies": {
+                "ansi-regex": {
+                  "version": "0.2.1",
+                  "from": "ansi-regex@^0.2.1",
+                  "resolved": "https://registry.npmjs.org/ansi-regex/-/ansi-regex-0.2.1.tgz"
+                }
+              }
+            },
+            "supports-color": {
+              "version": "0.2.0",
+              "from": "supports-color@^0.2.0",
+              "resolved": "https://registry.npmjs.org/supports-color/-/supports-color-0.2.0.tgz"
+            }
+          }
+        }
+      }
+    },
     "grunt-browserify": {
       "version": "3.6.0",
       "from": "grunt-browserify@^3.6.0",
@@ -403,7 +507,7 @@
             },
             "console-browserify": {
               "version": "1.1.0",
-              "from": "console-browserify@1.1.x",
+              "from": "console-browserify@^1.1.0",
               "resolved": "https://registry.npmjs.org/console-browserify/-/console-browserify-1.1.0.tgz",
               "dependencies": {
                 "date-now": {
