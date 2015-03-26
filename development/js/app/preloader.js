@@ -6,24 +6,24 @@ define(['./selector'], function (Selector) {
 		this.totalImagesLoaded = 0;
 		this.imagesToLoad = [
 			'loading.gif',
-			'intro-background.jpg',
-			'projects-background.jpg',
-			'welcome-background.jpg',
-			'wwd-background.jpg',
-			'wwd-mobile-background.jpg',
 			'arrow.png',
+			'intro-background.jpg',
 			'logo-intro-bar.png',
 			'logo-intro-mobile.png',
 			'logo-transparent.png',
 			'logo-white.png',
+			'projects-background.jpg',
 			'projects-title.png',
-			'saltgreen-logo-57.png',
-			'saltgreen-logo-72.png',
 			'saltgreen-logo-114.png',
 			'saltgreen-logo-160.png',
+			'saltgreen-logo-57.png',
+			'saltgreen-logo-72.png',
 			'small-left-hand-logo.png',
+			'welcome-background.jpg',
 			'welcome-title.png',
-			'wwd-title.png'
+			'what-we-do-background.jpg',
+			'what-we-do-mobile-background.jpg',
+			'what-we-do-title.png'
 		];
 		this.imagesLoadedList = [];
 		this.totalImages = this.imagesToLoad.length;
