@@ -59,6 +59,7 @@
 	}
 	.pages {
 		background-attachment: scroll !important;
+
 		&.what-we-do {
 			filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/what-we-do-mobile-background.jpg', sizingMethod='scale');
 			-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/what-we-do-mobile-background.jpg', sizingMethod='scale')";
@@ -78,9 +79,9 @@
 
 		.we-work-on-item {
 			display: block;
-			width: 90%;
 			margin: 8px 0;
 			padding: 8px 5%;
+			width: 90%;
 
 			ul li {
 				margin: 0;
@@ -110,21 +111,17 @@
 @media all and (max-width: 860px) {
 
 	.mobile-menu {
-		filter: alpha(opacity=100);
 		opacity: 1;
 	}
 
 	#menu {
-		position: absolute;
-		padding-top: 48px;
-		z-index: 1;
-		-webkit-transition: -webkit-transform 1s;
-		transition: transform 1s;
 		cursor: pointer;
-		-ms-transform: translateX(100%);
-		-webkit-transform: translateX(100%);
-		transform: translateX(100%);
 		height: auto;
+		padding-top: 48px;
+		position: absolute;
+		transform: translateX(100%);
+		transition: transform 350ms;
+		z-index: 1;
 
 		nav ul li {
 			text-align: center;
@@ -132,10 +129,7 @@
 		}
 
 		&.on {
-			-webkit-transition: -webkit-transform 0.5s;
-			transition: transform 0.5s;
-			-ms-transform: translateX(0%);
-			-webkit-transform: translateX(0%);
+			transition: transform 350ms;
 			transform: translateX(0%);
 		}
 	}

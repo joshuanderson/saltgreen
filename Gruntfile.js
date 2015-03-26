@@ -16,6 +16,15 @@
 					}
 				}
 			},
+			autoprefixer: {
+				dist: {
+					files: {
+						'static-assets/css/animation.css': 'static-assets/css/animation.css',
+						'static-assets/css/responsive.css': 'static-assets/css/responsive.css',
+						'static-assets/css/style.css': 'static-assets/css/style.css'
+					}
+				}
+			},
 			compass: {
 				options: {
 					basePath: '',
@@ -40,8 +49,8 @@
 				}
 			},
 			watch: {
-				files: [ '<%= jshint.files %>' ],
-				tasks: [ 'jshint', 'compass:dev', 'requirejs' ]
+				files: [ 'Gruntfile.js', 'development/js/**/*.js', 'development/css/*.scss' ],
+				tasks: [ 'jshint', 'compass:dev', 'requirejs', 'autoprefixer' ]
 			}
 		};
 
@@ -51,7 +60,8 @@
 		grunt.loadNpmTasks('grunt-contrib-compass');
 		grunt.loadNpmTasks('grunt-contrib-jshint');
 		grunt.loadNpmTasks('grunt-contrib-watch');
+		grunt.loadNpmTasks('grunt-autoprefixer');
 
-		grunt.registerTask('default', [ 'jshint', 'compass:dev', 'requirejs', 'watch' ]);
+		grunt.registerTask('default', [ 'jshint', 'compass:dev', 'requirejs', 'autoprefixer', 'watch' ]);
 	};
 })();
