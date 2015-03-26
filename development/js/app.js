@@ -1,6 +1,6 @@
 (function () {
 	'use strict';
-	var isDevelopment = true;
+	var isDevelopment = false;
 	var requireConfig = {
 		baseUrl: 'static-assets/js/',
 		urlArgs: 't=' + (new Date()).getTime(),
