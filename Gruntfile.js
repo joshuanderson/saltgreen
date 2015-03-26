@@ -41,7 +41,7 @@
 			},
 			watch: {
 				files: [ '<%= jshint.files %>' ],
-				tasks: [ 'jshint', 'compass', 'requirejs' ]
+				tasks: [ 'jshint', 'compass:dev', 'requirejs' ]
 			}
 		};
 
@@ -52,6 +52,6 @@
 		grunt.loadNpmTasks('grunt-contrib-jshint');
 		grunt.loadNpmTasks('grunt-contrib-watch');
 
-		grunt.registerTask('default', [ 'jshint', 'compass', 'requirejs', 'watch' ]);
+		grunt.registerTask('default', [ 'jshint', 'compass:dev', 'requirejs', 'watch' ]);
 	};
 })();
