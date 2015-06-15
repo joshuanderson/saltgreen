@@ -1,2 +1,5 @@
 DirectoryIndex index.html
 ErrorDocument 404 error404.html
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^saltgreen.co.uk [NC]
+RewriteRule ^(.*)$ http://www.saltgreen.co.uk/$1 [L,R=301,NC]
