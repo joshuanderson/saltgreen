@@ -7,6 +7,7 @@ define(['./selector'], function (Selector) {
 		this.imagesToLoad = [
 			'loading.gif',
 			'arrow.png',
+			'contact-logos.png',
 			'intro-background.jpg',
 			'logo-intro-bar.png',
 			'logo-intro-mobile.png',

@@ -59,6 +59,10 @@ define([
 
 				if (pageId) {
 					self.nav.anim('#' + pageId);
+
+					if (ga) {
+						ga('send', 'pageview', { title: pageId });
+					}
 				}
 			};
 			var menuItem, pageId;
