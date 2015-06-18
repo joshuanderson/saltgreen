@@ -1,19 +1,20 @@
-define(['./selector'], function (Selector) {
-	'use strict';
+import Selector from './selector';
 
-	var Nav = function Nav(Selector, iterr, tm) {
-		this.selector = Selector;
+class Nav {
+
+	constructor (iterr, tm) {
+		this.selector = new Selector();
 		this.iterr = iterr;
 		this.tm = tm;
-	};
+	}
 
-	Nav.prototype.stopShow = function () {
+	stopShow () {
 		clearTimeout(this.tm);
 
 		this.iterr = 30;
-	};
+	}
 
-	Nav.prototype.getRealTop = function (el) {
+	getRealTop (el) {
 		var elm = el;
 		var realTop = 0;
 
@@ -24,17 +25,17 @@ define(['./selector'], function (Selector) {
 		while (elm);
 
 		return realTop;
-	};
+	}
 
-	Nav.prototype.getPageScroll = function () {
+	getPageScroll () {
 		var pgYoff = this.selector.w.pageYOffset ||
 				this.selector.d.body.scrollTop ||
 				this.selector.d.documentElement.scrollTop;
 
 		return pgYoff;
-	};
+	}
 
-	Nav.prototype.anim = function (id) {
+	anim  (id) {
 		var element = this.selector.find(id) || null;
 		var eOff, pOff, tOff, scrVal, pos, dir, step;
 		var self = this;
@@ -86,7 +87,8 @@ define(['./selector'], function (Selector) {
 			this.stopShow();
 			return;
 		}
-	};
+	}
+}
 
-	return Nav;
-});
+export default Nav;
+

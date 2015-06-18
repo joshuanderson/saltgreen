@@ -1,30 +1,39 @@
-define([
-	'./selector',
-	'./preloader',
-	'./events',
-	'./pages',
-	'./nav'
-	], function (Selector, Preloader, Events, Pages, Nav) {
-		'use strict';
+import Selector from './selector';
+import Preloader from './preloader';
+import Events from './events';
+import Pages from './pages';
+import Nav from './nav';
 
-		var Main = function (Selector, Preloader, Events, Pages, Nav) {
-			this.selector = new Selector();
-			this.preloader = new Preloader(this.selector);
-			this.events = new Events(this, this.selector);
-			this.pages = new Pages(this.selector);
-			this.nav = new Nav(this.selector, 30, null);
-		};
+class Main {
 
-		Main.prototype._isArray = function (array) {
+		constructor () {
+			this._selector = new Selector();
+			this._preloader = new Preloader();
+			this._events = new Events(this._isArray);
+			this._pages = new Pages();
+			this._nav = new Nav(30, null);
+
+			this._preloader.preloadImages(() => {
+				this._pages.setAllHeightsWidths();
+				this.addPageResizeEvents();
+				this.addMenuItemsEvents();
+				this.addCloseOverlayEvents();
+				this.addOverlayEvents();
+				this.addMobileMenuEvents();
+				this.checkHash();
+			});
+		}
+
+		_isArray (array) {
 			return !!array.length || false;
-		};
+		}
 
-		Main.prototype._clearOverlay = function (overlay) {
+		_clearOverlay (overlay) {
 			overlay.style.display = 'block';
 			overlay.className = '';
-		};
+		}
 
-		Main.prototype._addOverlayClass = function (overlay) {
+		_addOverlayClass (overlay) {
 			if (this._isArray(overlay)) {
 				for (var i = 0; i < overlay.length; i++) {
 					overlay[ i ].className = 'hidden';
@@ -32,9 +41,9 @@ define([
 			} else {
 				overlay.className = 'hidden';
 			}
-		};
+		}
 
-		Main.prototype._removeOverlayStyle = function (overlay) {
+		_removeOverlayStyle (overlay) {
 			if (this._isArray(overlay)) {
 				for (var i = 0; i < overlay.length; i++) {
 					overlay[ i ].style.display = 'none';
@@ -42,23 +51,22 @@ define([
 			} else {
 				overlay.style.display = 'none';
 			}
-		};
+		}
 
-		Main.prototype.addPageResizeEvents = function () {
-			var self = this;
-			this.events.addToWindow('resize', function () {
-				self.pages.setAllHeightsWidths();
+		addPageResizeEvents () {
+			this._events.addToWindow('resize', () => {
+				this._pages.setAllHeightsWidths();
 			});
-		};
+		}
 
-		Main.prototype.addMenuItemsEvents = function () {
-			var menuItems = this.selector.find(".menu-item");
-			var self = this;
-			var animateNavigation = function () {
+		addMenuItemsEvents () {
+			var menuItems = this._selector.find(".menu-item");
+			var animateNavigation = (event) => {
+				console.log(event); return;
 				pageId = this.dataset.page;
 
 				if (pageId) {
-					self.nav.anim('#' + pageId);
+					this._nav.anim('#' + pageId);
 
 					if (ga) {
 						ga('send', 'pageview', { title: pageId });
@@ -71,35 +79,35 @@ define([
 				for (var j = 0; j < menuItems.length; j++) {
 					menuItem = menuItems[j];
 
-					this.events.addToElement(menuItem, 'click', animateNavigation);
+					this._events.addToElement(menuItem, 'click', animateNavigation);
 				}
 			}
-		};
+		}
 
-		Main.prototype.addCloseOverlayEvents = function () {
-			var overlayBg = this.selector.find('#overlay-background');
-			var overlayContact = this.selector.find('#overlay-contact');
-			var overlayTestimonials = this.selector.find('#overlay-testimonials');
-			var overlayClose = this.selector.find('#overlay-contact a.close', true);
-			var self = this;
+		addCloseOverlayEvents () {
+			var overlayBg = this._selector.find('#overlay-background');
+			var overlayContact = this._selector.find('#overlay-contact');
+			var overlayTestimonials = this._selector.find('#overlay-testimonials');
+			var overlayClose = this._selector.find('#overlay-contact a.close', true);
 
-			this.events.addToElements([ overlayBg, overlayClose ], 'click', function () {
-				self._addOverlayClass([ overlayBg, overlayContact, overlayTestimonials ]);
-				self.resetHash();
-				self.selector.w.setTimeout(function () {
-					self._removeOverlayStyle([ overlayContact, overlayBg, overlayTestimonials ]);
+
+			this._events.addToElements([ overlayBg, overlayClose ], 'click', () => {
+				this._addOverlayClass([ overlayBg, overlayContact, overlayTestimonials ]);
+				this.resetHash();
+				this._selector.w.setTimeout(() => {
+					this._removeOverlayStyle([ overlayContact, overlayBg, overlayTestimonials ]);
 				}, 2000);
 
 			});
-		};
+		}
 
 
-		Main.prototype.addMobileMenuEvents = function () {
-			var mobileMenu = this.selector.find('.mobile-menu');
-			var self = this;
+		addMobileMenuEvents () {
+			var mobileMenu = this._selector.find('.mobile-menu');
 
-			this.events.addToElements(mobileMenu, 'click', function () {
-				var mobileMenu = self.selector.find('#menu');
+
+			this._events.addToElements(mobileMenu, 'click', () => {
+				var mobileMenu = this._selector.find('#menu');
 
 				if (mobileMenu.className === 'on') {
 					mobileMenu.className = '';
@@ -107,18 +115,16 @@ define([
 					mobileMenu.className = 'on';
 				}
 			});
-		};
+		}
 
-
-		Main.prototype.addOverlayEvents = function () {
-			var overlays = this.selector.find('*[data-overlay]', true);
-			var overlayBg = this.selector.find('#overlay-background');
-			var self = this;
-			var clearOverlay = function () {
+		addOverlayEvents () {
+			var overlays = this._selector.find('*[data-overlay]', true);
+			var overlayBg = this._selector.find('#overlay-background');
+			var clearOverlay = () => {
 				overlayId = this.dataset.overlay;
 
-				self._clearOverlay(self.selector.find('#overlay-' + overlayId));
-				self._clearOverlay(overlayBg);
+				this._clearOverlay(this._selector.find('#overlay-' + overlayId));
+				this._clearOverlay(overlayBg);
 			};
 			var overlay, overlayId;
 
@@ -126,41 +132,29 @@ define([
 				for (var i = 0; i < overlays.length; i++) {
 					overlay = overlays[ i ];
 
-					this.events.addToElement(overlay, 'click', clearOverlay);
+					this._events.addToElement(overlay, 'click', clearOverlay);
 				}
 			}
-		};
+		}
 
-		Main.prototype.checkHash = function () {
+		checkHash () {
 			var hash = location.hash;
 			var object;
+
 			if (hash === '') {
 				this.resetHash();
 			} else {
-				object = this.selector.find('a[href="' + hash + '"]', true);
+				object = this._selector.find('a[href="' + hash + '"]', true);
 				if (this._isArray(object)) {
 					object[0].click();
 				}
 
 			}
-		};
+		}
 
-		Main.prototype.resetHash = function () {
+		resetHash () {
 			location.hash = '#/home';
-		};
+		}
+}
 
-		Main.prototype.init = function () {
-			var self = this;
-			this.preloader.preloadImages(function() {
-				self.pages.setAllHeightsWidths();
-				self.addPageResizeEvents();
-				self.addMenuItemsEvents();
-				self.addCloseOverlayEvents();
-				self.addOverlayEvents();
-				self.addMobileMenuEvents();
-				self.checkHash();
-			});
-		};
-
-		return Main;
-	});
+export default Main;

@@ -1,36 +1,40 @@
-define(['./selector'], function (Selector) {
-	'use strict';
+import Selector from './selector';
 
-	var Pages = function (Selector) {
-		this.selector = Selector;
-		this.height = 0;
-		this.width = 0;
+class Pages {
+
+	constructor () {
+		this._selector = new Selector();
+		this._height = 0;
+		this._width = 0;
 		this.total = 0;
 		this.timeout = null;
 	};
 
-	Pages.prototype.setPageHeightWidth = function (page) {
+	setPageHeightWidth (page) {
 		if (typeof page === 'object') {
-			var width = this.selector.w.innerWidth;
-			var height = this.selector.w.innerHeight;
+			var {
+				innerWidth: width,
+				innerHeight: height
+			} = this._selector.getWindow();
 
 			page.style.minHeight = height + 'px';
 			page.style.width = (width - 4) + 'px';
 
-			this.height = height;
-			this.width = width;
+			this._height = height;
+			this._width = width;
 		}
-	};
+	}
 
-	Pages.prototype.setAllHeightsWidths = function () {
-		var pages = this.selector.find('.pages');
+	setAllHeightsWidths () {
+		var pages = this._selector.find('.pages');
 
 		this.total = pages.length;
 
 		for (var i = 0; i < this.total; i++) {
 			this.setPageHeightWidth(pages[i]);
 		}
-	};
+	}
 
-	return Pages;
-});
+}
+
+export default Pages;

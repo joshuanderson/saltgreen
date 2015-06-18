@@ -1,9 +1,22 @@
 (function () {
 	'use strict';
 
+
 	module.exports = function (grunt) {
+		require('load-grunt-tasks')(grunt);
+
 		var initialConfig = {
 			pkg: grunt.file.readJSON('package.json'),
+			browserify: {
+				dist: {
+					options: {
+						transform: [ [ "babelify", { "stage": 0 } ] ]
+					},
+					files: {
+						"static-assets/js/app.js": "development/js/app.js"
+					}
+				}
+			},
 			requirejs: {
 				compile: {
 					options: {
@@ -41,6 +54,7 @@
 			jshint: {
 				files: [ 'Gruntfile.js', 'development/js/**/*.js' ],
 				options: {
+					esnext: true,
 					globals: {
 						console: true,
 						module: true,
@@ -50,18 +64,13 @@
 			},
 			watch: {
 				files: [ 'Gruntfile.js', 'development/js/**/*.js', 'development/css/*.scss' ],
-				tasks: [ 'jshint', 'compass:dev', 'requirejs', 'autoprefixer' ]
+				tasks: [ 'browserify' ]
 			}
 		};
 
 		grunt.initConfig(initialConfig);
-		grunt.loadNpmTasks('grunt-contrib-requirejs');
-		// grunt.loadNpmTasks('grunt-browserify');
-		grunt.loadNpmTasks('grunt-contrib-compass');
-		grunt.loadNpmTasks('grunt-contrib-jshint');
-		grunt.loadNpmTasks('grunt-contrib-watch');
-		grunt.loadNpmTasks('grunt-autoprefixer');
 
-		grunt.registerTask('default', [ 'jshint', 'compass:dev', 'requirejs', 'autoprefixer', 'watch' ]);
+		grunt.registerTask('default', [ 'browserify', 'watch' ]);
+		grunt.registerTask('continuous', [ 'jshint', 'compass:dev', 'autoprefixer', 'browserify', 'watch' ]);
 	};
 })();

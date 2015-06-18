@@ -1,15 +1,18 @@
-define(['./selector'], function (Selector) {
-	'use strict';
+import Selector from './selector';
+import Main from './main';
 
-	var Events = function (Main, Selector) {
-		this.main = Main;
-		this.selector = Selector;
-	};
+class Events {
 
-	Events.prototype.add = function (elem, type, eventHandle) {
+	constructor (isArray) {
+		this._selector = new Selector();
+		this._isArray = isArray;
+	}
+
+	add (elem, type, eventHandle) {
 		if (elem === null || (typeof elem === 'undefined')) {
 			return;
 		}
+
 		if (elem.addEventListener) {
 			elem.addEventListener(type, eventHandle, false);
 		} else if (elem.attachEvent) {
@@ -17,27 +20,30 @@ define(['./selector'], function (Selector) {
 		} else {
 			elem['on' + type] = eventHandle;
 		}
-	};
+	}
 
-	Events.prototype.addToWindow = function (type, callback) {
-		this.add(this.selector.w, type, callback);
-	};
+	addToWindow (type, callback) {
+		var win = this._selector.getWindow();
 
-	Events.prototype.addToDocument = function (type, callback) {
+		this.add(win, type, callback);
+	}
+
+	addToDocument (type, callback) {
 		this.add(this.selector.d, type, callback);
-	};
+	}
 
-	Events.prototype.addToElement = function (element, type, callback) {
+	addToElement (element, type, callback) {
 		this.add(element, type, callback);
-	};
+	}
 
-	Events.prototype.addToElements = function (elements, type, callback) {
-		if (this.main._isArray(elements)) {
+	addToElements (elements, type, callback) {
+		if (this._isArray(elements)) {
 			for (var i = 0; i < elements.length; i++) {
 				this.add(elements[i], type, callback);
 			}
 		}
-	};
+	}
 
-	return Events;
-});
+}
+
+export default Events;

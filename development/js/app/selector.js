@@ -1,43 +1,51 @@
-define(function () {
-	'use strict';
+class Selector {
 
-	var Selector = function () {
-		this.d = document;
-		this.w = window;
-	};
+	constructor () {
+		this._document = document;
+		this._window = window;
+	}
 
-	Selector.prototype.getByQuerySelector = function (object) {
-		var objects = this.d.querySelectorAll(object);
+	getWindow () {
+		return this._window;
+	}
+
+	getDocument () {
+		return this._document;
+	}
+
+	getByQuerySelector (object) {
+		var objects = this._document.querySelectorAll(object);
 
 		if (objects.length === 1) {
-			return this.d.querySelector(object);
+			return this._document.querySelector(object);
 		}
 
 		return objects;
-	};
+	}
 
-	Selector.prototype._getByTag = function (tagName) {
-		return this.d.getElementsByTagName(tagName);
-	};
+	_getByTag (tagName) {
+		return this._document.getElementsByTagName(tagName);
+	}
 
-	Selector.prototype._getById = function (id) {
-		return this.d.getElementById(id);
-	};
+	_getById (id) {
+		return this._document.getElementById(id);
+	}
 
-	Selector.prototype._getByClass = function (className) {
-		var objects = this.d.getElementsByClassName(className);
+	_getByClass (className) {
+		var objects = this._document.getElementsByClassName(className);
 
 		if (objects.length === 0) {
 			return null;
 		}
 
 		return objects;
-	};
+	}
 
-	Selector.prototype.find = function (object, querySelector) {
+	find (object, querySelector) {
 		var objectSubstr;
 
 		querySelector = querySelector || false;
+
 		if (querySelector) {
 			return this.getByQuerySelector(object);
 		}
@@ -51,7 +59,7 @@ define(function () {
 		}
 
 		return this._getByTag(object);
-	};
+	}
+}
 
-	return Selector;
-});
+export default Selector
