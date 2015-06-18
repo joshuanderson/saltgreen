@@ -73,7 +73,7 @@
 			},
 			watch: {
 				files: [ 'Gruntfile.js', 'development/js/**/*.js', 'development/css/*.scss' ],
-				tasks: [ 'browserify' ]
+				tasks: [ 'browserify', 'uglify' ]
 			}
 		};
 
