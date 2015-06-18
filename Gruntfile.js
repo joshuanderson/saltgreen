@@ -7,13 +7,22 @@
 
 		var initialConfig = {
 			pkg: grunt.file.readJSON('package.json'),
+			uglify: {
+				options: {
+					banner: '/*! Saltgreen bundle <%= grunt.template.today("yyyy-mm-dd") %> */ '
+				},
+				build: {
+					src: 'static-assets/js/app.js',
+					dest: 'static-assets/js/app.js'
+				}
+			},
 			browserify: {
 				dist: {
 					options: {
-						transform: [ [ "babelify", { "stage": 0 } ] ]
+						transform: [ [ 'babelify', { 'stage': 0 } ] ]
 					},
 					files: {
-						"static-assets/js/app.js": "development/js/app.js"
+						'static-assets/js/app.js': 'development/js/app.js'
 					}
 				}
 			},
@@ -70,7 +79,7 @@
 
 		grunt.initConfig(initialConfig);
 
-		grunt.registerTask('default', [ 'browserify', 'watch' ]);
+		grunt.registerTask('default', [ 'browserify', 'uglify', 'watch' ]);
 		grunt.registerTask('continuous', [ 'jshint', 'compass:dev', 'autoprefixer', 'browserify', 'watch' ]);
 	};
 })();

@@ -62,14 +62,17 @@ class Main {
 		addMenuItemsEvents () {
 			var menuItems = this._selector.find(".menu-item");
 			var animateNavigation = (event) => {
-				console.log(event); return;
-				pageId = this.dataset.page;
+				var { dataset, innerHTML } = event.srcElement;
+
+				pageId = dataset.page;
+
+				console.log(pageId);
 
 				if (pageId) {
 					this._nav.anim('#' + pageId);
 
 					if (ga) {
-						ga('send', 'pageview', { title: pageId });
+						ga('send', 'pageview', { title: innerHTML });
 					}
 				}
 			};

@@ -192,14 +192,19 @@ var Main = (function () {
 
 			var menuItems = this._selector.find('.menu-item');
 			var animateNavigation = function animateNavigation(event) {
-				console.log(event);return;
-				pageId = _this3.dataset.page;
+				var _event$srcElement = event.srcElement;
+				var dataset = _event$srcElement.dataset;
+				var innerHTML = _event$srcElement.innerHTML;
+
+				pageId = dataset.page;
+
+				console.log(pageId);
 
 				if (pageId) {
 					_this3._nav.anim('#' + pageId);
 
 					if (ga) {
-						ga('send', 'pageview', { title: pageId });
+						ga('send', 'pageview', { title: innerHTML });
 					}
 				}
 			};
@@ -521,8 +526,6 @@ var Preloader = (function () {
 			for (var i = 0; i < divs.length; i++) {
 				div = divs[i];
 				div.className = 'loaded';
-
-				win.setTimeout(this.resetDivDisplay, this._seconds);
 
 				callback();
 				this._seconds = this._seconds + 1000;

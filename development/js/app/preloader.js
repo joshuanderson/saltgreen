@@ -46,8 +46,6 @@ class Preloader {
 			div = divs[i];
 			div.className = 'loaded';
 
-			win.setTimeout(this.resetDivDisplay, this._seconds);
-
 			callback();
 			this._seconds = this._seconds + 1000;
 		}
